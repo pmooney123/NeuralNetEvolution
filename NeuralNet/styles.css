@@ -13,11 +13,6 @@ body {
     grid-template-columns: repeat(4, auto);
     margin-top: 5px;
 }
-.canvas {
-    width: 200px;
-    height: 200px;
-    background-color: red;
-}
 .canvas-container {
     margin-left: 15px;
     margin-right: 15px;

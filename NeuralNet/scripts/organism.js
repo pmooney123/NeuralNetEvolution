@@ -26,6 +26,7 @@ class Organism {
 
         if (getRandomInt(mutationRatio) == 1) {
             console.log('mutation!');
+
             let mutGeneNum = getRandomInt(this.genes.length);
             let mutGeneIndex = getRandomInt(3);
             let newValue = 'error';
@@ -204,8 +205,8 @@ function getRandomInt(max) {
 function getRandomNumGene() {
 
     let newGene = '';
-    newGene = newGene.concat(getRandomInt(5));
-    newGene = newGene.concat(getRandomInt(8));
+    newGene = newGene.concat(getRandomInt(10));
+    newGene = newGene.concat(getRandomInt(10));
     newGene = newGene.concat(getRandomInt(10));
     return newGene;
 }

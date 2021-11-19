@@ -2,13 +2,16 @@ class OscillatorSensor {
     constructor() {
         this.isSensor = true;
     }
+    getCode() {
+        return 'Osc'
+    }
     getOutputRaw(organism) {
         return Math.sin(currentSimStep);
     }
     getName() {
         return 'Oscillator Sensor';
     }
-}
+} //OS
 class AgeSensor {
     constructor() {
         this.isSensor = true;
@@ -17,46 +20,59 @@ class AgeSensor {
     getOutputRaw(organism) {
         return currentSimStep/maxSimSteps;
     }
+    getCode() {
+        return 'Age'
+    }
     getName() {
         return 'Age Sensor';
     }
-}
+} //AG
 class XAxisSensor {
     constructor() {
         this.isSensor = true;
 
     }
     getOutputRaw(organism) {
-        return organism.x/mapWidth;
+        //console.log(((organism.x - (mapWidth/2))/mapWidth));
+        return ((organism.x - (mapWidth/2))/mapWidth);
+    }
+    getCode() {
+        return '+XS'
     }
     getName() {
         return 'X-Axis Sensor';
     }
-}
+} //XA
 class YAxisSensor {
     constructor() {
         this.isSensor = true;
 
     }
     getOutputRaw(organism) {
-        return organism.y/mapHeight;
+        return ((organism.y - (mapHeight/2))/mapHeight);
+    }
+    getCode() {
+        return '+YS'
     }
     getName() {
         return 'Y-Axis Sensor';
     }
-}
+} //YA
 class RandomSensor {
     constructor() {
         this.isSensor = true;
 
     }
     getOutputRaw(organism) {
-        return Math.random();
+        return Math.random() - 0.5;
+    }
+    getCode() {
+        return 'RS'
     }
     getName() {
         return 'Random Sensor';
     }
-}
+} //RS
 
 class InnerNeuron {
     constructor() {
@@ -72,6 +88,9 @@ class InnerNeuron {
     }
     getName() {
         return 'Inner Neuron ' + this.id;
+    }
+    getCode() {
+        return this.id;
     }
     sum() {
         let total = 0;
@@ -98,6 +117,9 @@ class YAxisAction {
     getName() {
         return 'YAxis Output';
     }
+    getCode() {
+        return 'Ya'
+    }
     sum() {
         let total = 0;
         for (let i = 0; i < this.inputs.length; i++) {
@@ -108,7 +130,7 @@ class YAxisAction {
         }
         this.input = total;
     }
-}
+} //YA
 class XAxisAction {
     constructor() {
         this.inputs = [];
@@ -122,6 +144,9 @@ class XAxisAction {
     getName() {
         return 'XAxis Output';
     }
+    getCode() {
+        return 'Xa'
+    }
     sum() {
         let total = 0;
         for (let i = 0; i < this.inputs.length; i++) {
@@ -132,7 +157,7 @@ class XAxisAction {
         }
         this.input = total;
     }
-}
+} //XA
 class RandomAction {
     constructor() {
         this.inputs = [];
@@ -147,6 +172,9 @@ class RandomAction {
             organism.move(0, this.input);
         }
     }
+    getCode() {
+        return 'Ra'
+    }
     getName() {
         return 'Random Output';
     }
@@ -160,7 +188,7 @@ class RandomAction {
         }
         this.input = total;
     }
-}
+} //RA
 
 class Connection {
     constructor() {
