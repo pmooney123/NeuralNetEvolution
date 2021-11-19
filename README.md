@@ -1,5 +1,8 @@
 # NeuralNetEvolution
+Create neural networks from Genes, to simulate evolution of behavior.
 
+
+HOW THE BRAINS WORK:
 Blue: sensor neuron (SN)- takes an input from the world and outputs -0.5 to 0.5. Can connect to inner neurons, and action neurons.
 Pink: inner neuron (IN), can connect to sensors, actions, and any inner neuron (including itself)
 Red: action neuron (AN)- takes an input and performs a behaviour
