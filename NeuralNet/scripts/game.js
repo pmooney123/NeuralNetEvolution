@@ -1,14 +1,15 @@
 var currentFPS = 0;
-var paused = true;
+var paused = false;
 var runningSim = true;
 
 var maxSimSteps = 200; //auto pause at here
 var currentSimStep = 0; //simstep #
-var roundLength = 300; //how many steps in a round
+var roundLength = 250; //how many steps in a round
 var currentRound = 0;
-var maxRounds = 100;
-var popSize = 100; //number of organisms
-var geneticLength = 4; //number of genes
+var maxRounds = 200;
+var mutationRatio = 1000;
+var popSize = 500; //number of organisms
+var geneticLength = 5; //number of genes
 var innerNeurons = 1; //number of inner neurons
 
 var mapWidth = 200;
@@ -116,7 +117,7 @@ function animate() {
     } else {
 
     }
-    statsText.innerText = "STATS: \n Paused: " + paused + " \n Running: " + runningSim + " \n Step: " + currentSimStep + "/" + maxSimSteps + " \n Round: " + currentRound + "/" + maxRounds + " \n Survival%: " + survivalRate;
+    statsText.innerText = "STATS: \n Paused: " + paused + " \n Running: " + runningSim + " \n Step: " + currentSimStep + "/" + maxSimSteps + " \n Round: " + currentRound + "/" + maxRounds + " \n Survival%: " + survivalRate+ " \n Mutation%: " + 1/mutationRatio;
 
 
     requestAnimationFrame(animate);

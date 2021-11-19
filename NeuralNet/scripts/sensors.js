@@ -3,7 +3,7 @@ class OscillatorSensor {
         this.isSensor = true;
     }
     getOutputRaw(organism) {
-        return Math.abs(Math.sin(currentSimStep));
+        return Math.sin(currentSimStep);
     }
     getName() {
         return 'Oscillator Sensor';
@@ -67,6 +67,7 @@ class InnerNeuron {
         this.isAction = false;
     }
     getOutputRaw(organism) {
+        //console.log(this.getName() + " has a total input of " + this.input);
         return this.input;
     }
     getName() {
@@ -91,7 +92,6 @@ class YAxisAction {
         this.input = 0;
     }
     perform(organism) {
-        //console.log(this.getName() + " has a total input of " + this.input);
 
         organism.move(0, this.input);
     }

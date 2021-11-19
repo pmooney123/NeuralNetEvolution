@@ -6,7 +6,7 @@ class Organism {
         this.y = getRandomInt(mapHeight);
         this.size = 2;
 
-        if (parent1 != null ) {
+        if (parent1 != null ) { //COPY PARENT GENES/COLOR
             //console.log('parent not null, using parent')
             this.color = parent1.color;
             //setGenome
@@ -14,7 +14,7 @@ class Organism {
             for (let x = 0; x < numGenes; x++) {
                 this.genes.push(parent1.genes[x]);
             }
-        } else {
+        } else { //GET BRAND NEW GENETIC CODE
             //console.log('parent null, not using parent')
             this.color = "rgb(" + getRandomInt(255) + ", " + getRandomInt(255) + ", " + getRandomInt(255) + ")";
             //setGenome
@@ -24,6 +24,26 @@ class Organism {
             }
         }
 
+        if (getRandomInt(mutationRatio) == 1) {
+            console.log('mutation!');
+            let mutGeneNum = getRandomInt(this.genes.length);
+            let mutGeneIndex = getRandomInt(3);
+            let newValue = 'error';
+            if (mutGeneIndex % 3 == 0) {
+                newValue = getRandomInt(10);
+
+            } else if (mutGeneIndex % 2 == 0) {
+                newValue = getRandomInt(8);
+
+            } else if (mutGeneIndex % 1 == 0) {
+                newValue = getRandomInt(5);
+            }
+            let newMutGene = this.genes[mutGeneNum].substring(0,mutGeneIndex) + newValue + this.genes[mutGeneNum].substring(mutGeneIndex + 1);
+            console.log('replaced ' + this.genes[mutGeneNum] + " with " + newMutGene);
+            this.genes[mutGeneNum] = newMutGene;
+
+
+        }
 
         this.logGenome();
 
@@ -35,7 +55,7 @@ class Organism {
         this.sensors.push(new YAxisSensor());
         this.sensors.push(new RandomSensor());
 
-        this.neurons = [];
+        this.neurons = []; //inner neurons
         for (let i = 0; i < numInnerNeurons; i++) {
             this.neurons.push(new InnerNeuron());
         }
@@ -61,7 +81,7 @@ class Organism {
             this.outputs.push(this.actions[i]);
         }
 
-        this.connections = [];
+        this.connections = []; //determined entirely by genes, connect a sensor/innerneuron to a innerneuron/output.
         for (let i = 0; i < this.genes.length; i++) {
             let newConnection = new Connection();
             let gene = this.genes[i];
@@ -132,6 +152,7 @@ class Organism {
         //sum all and execute
         for (let i = 0; i < this.outputs.length; i++) {
             this.outputs[i].sum();
+
             if (this.outputs[i].isAction == true) {
                 this.outputs[i].perform(this);
             }
@@ -150,7 +171,7 @@ class Organism {
 
     }
     getConnectionText() {
-        let text = "";
+        let text = this.color + " ";
         for (let i = 0; i < this.connections.length; i++) {
             text = text.concat("\n " + this.connections[i].getText());
         }
