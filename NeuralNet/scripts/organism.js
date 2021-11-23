@@ -168,9 +168,6 @@ class Organism {
         }
         //console.log(text);
     }
-    randomizeGenome() {
-
-    }
     getConnectionText() {
         let text = this.color + " ";
         for (let i = 0; i < this.connections.length; i++) {
@@ -199,6 +196,9 @@ class Organism {
         }
     }
 }
+
+
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }

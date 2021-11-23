@@ -12,8 +12,10 @@ var popSize = 500; //number of organisms
 var geneticLength = 6; //number of genes
 var innerNeurons = 1; //number of inner neurons
 
-var mapWidth = 200;
-var mapHeight = 200;
+var mapWidth = 500;
+var mapHeight = 500;
+document.getElementById('canvas-con').style.width = mapWidth + "px";
+document.getElementById('canvas-con').style.height = mapHeight + "px";
 var tileMap; //holds map info
 
 var popArray = []; //holds all organisms
@@ -23,8 +25,12 @@ var survivalRate = 0;
 
 const canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+ctx.canvas.width = mapWidth;
+ctx.canvas.height = mapHeight;
 const canvas2 = document.getElementById('canvas2');
 var ctx2 = canvas2.getContext('2d');
+ctx2.canvas.width = 200;
+ctx2.canvas.height = 200;
 
 const startButton = document.getElementById('start');
 const pauseButton = document.getElementById('pause');
@@ -46,9 +52,9 @@ statsButton.addEventListener("click", function() {
                 drawBrain();
            });
 function drawBrain() {
-    ctx2.clearRect(0, 0, 1000, 1000);
+    ctx2.clearRect(0, 0, mapWidth, mapHeight);
     ctx2.fillStyle = 'white';
-    ctx2.fillRect(0,0,200,200);
+    ctx2.fillRect(0,0,mapWidth,mapHeight);
     let organism = popArray[0];
 
     //draw sensors
@@ -188,6 +194,7 @@ function createNewGeneration() {
 
 }
 function advanceSim() {
+    console.log(canvas.width + " " + canvas.height);
     if (currentSimStep < maxSimSteps) {
         currentSimStep++;
         ctx.clearRect(0,0,mapWidth * 2,mapHeight * 2);
